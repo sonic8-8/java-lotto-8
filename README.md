@@ -16,33 +16,36 @@
 - [x] 발행한 로또 번호를 오름차순 정렬한다.
 
 - [x] 매개변수로 받은 금액에 해당하는 만큼 로또를 발행한다.
-- [x] 구입 금액이 1,000원으로 나누어 떨어지지 않는 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
+- 구입 금액의 유효성을 검증한다.
+  - [x] 구입 금액이 1,000원으로 나누어 떨어지지 않는 경우, IllegalArgumentException을 발생시킨다.
+  - [ ] 구입 금액이 음수일 경우, IllegalArgumentException을 발생시킨다.
  
 - [x] 매개변수로 받은 숫자 리스트와 당첨 번호를 일치하는 개수만큼 반환한다.
 - [x] 매개변수로 받은 숫자 리스트의 보너스 번호 포함 여부를 반환한다.
 - 당첨 번호의 유효성을 검증한다.
-  - [ ] 당첨 번호가 6개가 아닐 경우, IllegalArgumentException을 발생시키고 에러 메시지 출력 후 재입력 받는다.
-  - [ ] 당첨 번호가 1~45 범위를 벗어날 경우, IllegalArgumentException을 발생시키고 에러 메시지 출력 후 재입력 받는다.
-  - [ ] 당첨 번호에 중복된 숫자가 있을 경우, IllegalArgumentException을 발생시키고 에러 메시지 출력 후 재입력 받는다.
+  - [x] 당첨 번호가 6개가 아닐 경우, IllegalArgumentException을 발생시킨다.
+  - [x] 당첨 번호가 1~45 범위를 벗어날 경우, IllegalArgumentException을 발생시킨다.
+  - [x] 당첨 번호에 중복된 숫자가 있을 경우, IllegalArgumentException을 발생시킨다.
+  - [x] 보너스 번호가 1~45 범위를 벗어날 경우, IllegalArgumentException을 발생시킨다.
+  - [x] 보너스 번호가 당첨 번호와 중복될 경우, IllegalArgumentException을 발생시킨다.
 
 - [x] 당첨 내역을 조회한다.
 - [x] 당첨 내역과 구입 금액으로 수익률을 계산한다.
 
 **<검증/변환>**
 
-- 구입 금액의 유효성을 검증한다.
-    - [ ] 구입 금액이 음수일 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
-    - [ ] 구입 금액이 범위를 초과할 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
+- 구입 금액 String을 int로 변환한다.
+    - [ ] 입력값의 앞뒤 공백을 제거한다.
+    - [ ] 입력 값이 유효한 숫자 형식이 아니거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
 
-- [ ] 당첨 번호를 쉼표를 기준으로 파싱한다. (당첨 번호는 사용자 입력임. 검증과 변환이 필요함)
-- 당첨 번호의 유효성을 검증한다.
-    - [ ] 당첨 번호가 1~45 사이의 숫자가 아닐 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
-    - [ ] 당첨 번호에 공백이 포함될 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
-    - [ ] 당첨 번호가 숫자가 아닐 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
-- 보너스 번호의 유효성을 검증한다.
-    - [ ] 보너스 번호가 1~45 사이의 숫자가 아닐 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
-    - [ ] 보너스 번호에 공백이 포함될 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
-    - [ ] 보너스 번호가 숫자가 아닐 경우, IllegalArgumentException이 발생하고 에러 메시지 출력 후 재입력 받는다.
+- 당첨 번호 String을 List<Integer>로 파싱한다.
+  - [ ] 쉼표(,)를 기준으로 분리한다.
+  - [ ] 각 번호 문자열의 앞뒤 공백을 제거한다.
+  - [ ] 변환 중 숫자 형식이 아닌 값이 있거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
+
+- 보너스 번호 String을 int로 변환한다.
+    - [ ] 입력값의 앞뒤 공백을 제거한다.
+    - [ ] 입력값이 유효한 숫자 형식이 아니거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
 
 **<I/O>**
 
