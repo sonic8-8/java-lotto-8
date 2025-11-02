@@ -1,12 +1,8 @@
 package lotto.model;
 
-import lotto.model.Lotto;
 import lotto.strategy.GenerateStrategy;
-import org.assertj.core.internal.Integers;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoVendingMachine {
@@ -19,6 +15,10 @@ public class LottoVendingMachine {
     }
 
     public List<Lotto> buyLottos(int purchasedPrice) {
+        if (purchasedPrice % lottoPrice != 0) {
+            throw new IllegalArgumentException("[ERROR] 구입 금액은 " + lottoPrice + "원 단위여야 합니다.");
+        }
+
         int count = purchasedPrice / lottoPrice;
 
         return Stream.generate(() -> Lotto.of(generateStrategy.generateNumbers()))

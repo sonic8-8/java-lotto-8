@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.model.Lotto;
-import lotto.model.LottoVendingMachine;
 import lotto.strategy.FixedGenerateStrategy;
 import lotto.strategy.GenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
@@ -10,12 +8,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoVendingMachineTest {
-    @DisplayName("구매 금액에 해당하는 개수만큼 로또를 발급한다.")
+    @DisplayName("구입 금액에 해당하는 개수만큼 로또를 발급한다.")
     @Test
-    void test() {
+    void buyLottos() {
         // given
         GenerateStrategy fixedGenerateStrategy = new FixedGenerateStrategy();
         int lottoPrice = 1000;
@@ -35,4 +33,20 @@ class LottoVendingMachineTest {
                 );
     }
 
+    @DisplayName("구입 금액이 로또 1개 가격으로 나누어 떨어지지 않을 경우, 예외가 발생한다.")
+    @Test
+    void buyLottos_lottoPrice_exception() {
+        // given
+        GenerateStrategy fixedGenerateStrategy = new FixedGenerateStrategy();
+        int lottoPrice = 1000;
+
+        LottoVendingMachine lottoVendingMachine = new LottoVendingMachine(fixedGenerateStrategy, lottoPrice);
+
+        int purchasedAmount = 3100;
+
+        // when then
+        assertThatThrownBy(() -> lottoVendingMachine.buyLottos(purchasedAmount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 구입 금액은 " + lottoPrice + "원 단위여야 합니다.");
+    }
 }
