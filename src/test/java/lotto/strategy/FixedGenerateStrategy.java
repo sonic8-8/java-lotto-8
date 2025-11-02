@@ -1,7 +1,5 @@
 package lotto.strategy;
 
-import lotto.strategy.GenerateStrategy;
-
 import java.util.List;
 
 public class FixedGenerateStrategy implements GenerateStrategy {
