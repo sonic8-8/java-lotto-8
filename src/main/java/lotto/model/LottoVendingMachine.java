@@ -7,30 +7,16 @@ import java.util.stream.Stream;
 
 public class LottoVendingMachine {
     private final GenerateStrategy generateStrategy;
-    private final int lottoPrice;
 
-    public LottoVendingMachine(GenerateStrategy generateStrategy, int lottoPrice) {
+    public LottoVendingMachine(GenerateStrategy generateStrategy) {
         this.generateStrategy = generateStrategy;
-        this.lottoPrice = lottoPrice;
     }
 
     public List<Lotto> buyLottos(int purchasePrice) {
-        validatePurchasePrice(purchasePrice);
-
-        int count = purchasePrice / lottoPrice;
+        int count = purchasePrice / LottoRule.LOTTO_PRICE;
 
         return Stream.generate(() -> Lotto.of(generateStrategy.generateNumbers()))
                 .limit(count)
                 .toList();
-    }
-
-    private void validatePurchasePrice(int purchasePrice) {
-        if (purchasePrice % lottoPrice != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 " + lottoPrice + "원 단위여야 합니다.");
-        }
-
-        if (purchasePrice < 0) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 음수일 수 없습니다.");
-        }
     }
 }

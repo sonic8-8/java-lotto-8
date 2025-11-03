@@ -1,9 +1,13 @@
 package lotto.io;
 
 import lotto.model.Lotto;
+import lotto.model.LottoRank;
 import lotto.model.LottoStatistics;
 
 import java.util.List;
+import java.util.Map;
+
+import static lotto.model.LottoRank.*;
 
 public class OutputHandler {
     public void askPurchasePrice() {
@@ -31,14 +35,27 @@ public class OutputHandler {
         System.out.println("당첨 통계");
         System.out.println("---");
 
-        lottoStatistics.findWinningResult()
-                .forEach((lottoRank, count) -> {
-                    String prizeMoney = String.format("%,d", lottoRank.getPrizeMoney());
-                    System.out.println(lottoRank.getDescription() + "(" + prizeMoney + "원) - " + count + "개");
-                });
+        showWinningDetails(lottoStatistics.findWinningResult());
 
-        String profitRate = String.format("%.1f", lottoStatistics.calculateProfitRate());
-        System.out.println("총 수익률은 " + profitRate + "%입니다.");
+        showProfitRate(lottoStatistics.calculateProfitRate());
+    }
+
+    private void showWinningDetails(Map<LottoRank, Integer> winningResult) {
+        List<LottoRank> ranksToDisplay = List.of(
+                FIFTH, FOURTH, THIRD, SECOND, FIRST
+        );
+
+        ranksToDisplay.forEach(lottoRank -> {
+                    Integer count = winningResult.getOrDefault(lottoRank, 0);
+                    String prizeMoney = String.format("%,d", lottoRank.getPrizeMoney());
+
+                    System.out.println(lottoRank.getDescription() + " (" + prizeMoney + "원) - " + count + "개");
+                });
+    }
+
+    private void showProfitRate(double profitRate) {
+        String formattedRate = String.format("%.1f", profitRate);
+        System.out.println("총 수익률은 " + formattedRate + "%입니다.");
         System.out.println();
     }
 

@@ -12,16 +12,16 @@ import static org.assertj.core.api.Assertions.*;
 class LottoStatisticsTest {
     @DisplayName("당첨 통계를 조회할 경우, 항상 복사본을 반환한다.")
     @Test
-    void test() {
+    void of() {
         // given
         Map<LottoRank, Integer> rankCounts = new HashMap<>();
         rankCounts.put(FIFTH, 1);
-        rankCounts.put(LottoRank.FOURTH, 1);
-        rankCounts.put(LottoRank.THIRD, 1);
+        rankCounts.put(FOURTH, 1);
+        rankCounts.put(THIRD, 1);
 
-        int purchasedAmount = 3000;
+        int purchasePrice = 3000;
 
-        LottoStatistics lottoStatistics = LottoStatistics.of(rankCounts, purchasedAmount);
+        LottoStatistics lottoStatistics = LottoStatistics.of(rankCounts, purchasePrice);
 
         Map<LottoRank, Integer> winningResult = lottoStatistics.findWinningResult();
         winningResult.put(FIRST, 1);
@@ -31,7 +31,7 @@ class LottoStatisticsTest {
 
         // then
         assertThat(newWinningResult).hasSize(3)
-                .containsExactly(
+                .containsOnly(
                         entry(FIFTH, 1),
                         entry(FOURTH, 1),
                         entry(THIRD, 1)
@@ -44,8 +44,8 @@ class LottoStatisticsTest {
         // given
         Map<LottoRank, Integer> rankCounts = new HashMap<>();
         rankCounts.put(FIFTH, 1);
-        rankCounts.put(LottoRank.FOURTH, 1);
-        rankCounts.put(LottoRank.THIRD, 1);
+        rankCounts.put(FOURTH, 1);
+        rankCounts.put(THIRD, 1);
 
         int purchasedAmount = 3000;
 
@@ -55,7 +55,7 @@ class LottoStatisticsTest {
         double profitRate = lottoStatistics.calculateProfitRate();
 
         // then
-        double expectedRate = 1_555_000.0 / 3_000;
+        double expectedRate = 51833.333;
         assertThat(profitRate).isCloseTo(expectedRate, offset(0.001));
     }
 

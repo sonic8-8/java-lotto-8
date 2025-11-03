@@ -5,15 +5,15 @@ import java.util.Map;
 
 public class LottoStatistics {
     private final Map<LottoRank, Integer> rankCounts;
-    private final int purchasedAmount;
+    private final int purchasePrice;
 
-    private LottoStatistics(Map<LottoRank, Integer> rankCounts, int purchasedAmount) {
+    private LottoStatistics(Map<LottoRank, Integer> rankCounts, int purchasePrice) {
         this.rankCounts = rankCounts;
-        this.purchasedAmount = purchasedAmount;
+        this.purchasePrice = purchasePrice;
     }
 
-    public static LottoStatistics of(Map<LottoRank, Integer> rankCounts, int purchasedAmount) {
-        return new LottoStatistics(rankCounts, purchasedAmount);
+    public static LottoStatistics of(Map<LottoRank, Integer> rankCounts, int purchasePrice) {
+        return new LottoStatistics(rankCounts, purchasePrice);
     }
 
     public Map<LottoRank, Integer> findWinningResult() {
@@ -26,6 +26,6 @@ public class LottoStatistics {
                 .mapToDouble(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
 
-        return totalPrizeMoney / purchasedAmount;
+        return totalPrizeMoney / purchasePrice * 100;
     }
 }

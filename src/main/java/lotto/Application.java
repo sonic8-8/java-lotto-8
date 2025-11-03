@@ -1,7 +1,23 @@
 package lotto;
 
+import lotto.io.InputHandler;
+import lotto.io.OutputHandler;
+import lotto.model.LottoVendingMachine;
+import lotto.processor.PurchasePriceValidator;
+import lotto.processor.UserInputParser;
+import lotto.strategy.RandomGenerateStrategy;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        InputHandler inputHandler = new InputHandler();
+        OutputHandler outputHandler = new OutputHandler();
+        UserInputParser userInputParser = new UserInputParser();
+        PurchasePriceValidator purchasePriceValidator = new PurchasePriceValidator();
+
+        RandomGenerateStrategy randomGenerateStrategy = new RandomGenerateStrategy();
+        LottoVendingMachine lottoVendingMachine = new LottoVendingMachine(randomGenerateStrategy);
+
+        LottoGame lottoGame = new LottoGame(inputHandler, outputHandler, userInputParser, lottoVendingMachine, purchasePriceValidator);
+        lottoGame.run();
     }
 }
