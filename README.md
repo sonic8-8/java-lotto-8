@@ -35,17 +35,17 @@
 **<검증/변환>**
 
 - 구입 금액 String을 int로 변환한다.
-    - [ ] 입력값의 앞뒤 공백을 제거한다.
-    - [ ] 입력 값이 유효한 숫자 형식이 아니거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
+    - [x] 입력값의 앞뒤 공백을 제거한다.
+    - [x] 입력 값이 유효한 숫자 형식이 아니거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
 
 - 당첨 번호 String을 List<Integer>로 파싱한다.
-  - [ ] 쉼표(,)를 기준으로 분리한다.
-  - [ ] 각 번호 문자열의 앞뒤 공백을 제거한다.
-  - [ ] 변환 중 숫자 형식이 아닌 값이 있거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
+  - [x] 쉼표(,)를 기준으로 분리한다.
+  - [x] 파싱한 문자열의 앞뒤 공백을 제거한다.
+  - [x] 파싱한 문자열이 유효한 숫자 형식이 아니거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
 
 - 보너스 번호 String을 int로 변환한다.
-    - [ ] 입력값의 앞뒤 공백을 제거한다.
-    - [ ] 입력값이 유효한 숫자 형식이 아니거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
+    - [x] 입력값의 앞뒤 공백을 제거한다.
+    - [x] 입력값이 유효한 숫자 형식이 아니거나 int 범위를 초과할 경우, IllegalArgumentException을 발생시킨다.
 
 **<I/O>**
 
